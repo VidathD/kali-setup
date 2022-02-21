@@ -24,3 +24,6 @@ sudo apt install foremost binwalk
 
 # Network
 sudo apt install nmap
+
+# Meme
+sudo apt install nyancat cmatrix cowsay lolcat nyancat-server
