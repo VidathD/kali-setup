@@ -31,3 +31,6 @@ alias l.='exa -a | egrep "^\."'
 
 # ProxyChains
 alias pc='proxychains'
+
+# Making parent directories automatically
+alias mkdir='mkdir -vp'

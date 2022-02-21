@@ -262,6 +262,11 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# Add ruby gem installation directory to path
+if which ruby >/dev/null && which gem >/dev/null; then
+    PATH="$(ruby -r rubygems -e 'puts Gem.user_dir')/bin:$PATH"
+fi
+
 # Use aliases in ~/.zsh_aliases file
 if [ -f $HOME/.zsh_aliases ]; then
     . $HOME/.zsh_aliases
