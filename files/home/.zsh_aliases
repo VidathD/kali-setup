@@ -1,5 +1,6 @@
 # apt package manager
 alias upgrade='sudo apt update && sudo apt upgrade -y'
+alias fupgrade='sudo apt update && sudo apt -y full-upgrade && diff -y --suppress-common-lines /etc/skel/.zshrc ~/.zshrc && [ -f /var/run/reboot-required ] && sudo reboot -f'
 alias update='sudo apt update'
 alias install='sudo apt install -y'
 alias remove='sudo apt remove -y'
@@ -7,6 +8,7 @@ alias purge='sudo apt purge -y'
 alias pinstall='sudo proxychains apt install -y'
 alias pupdate='sudo proxychains apt update'
 alias pupgrade='sudo proxychains apt update && sudo proxychains apt upgrade -y'
+alias pfupgrade='sudo proxychains apt update && sudo proxychains apt -y full-upgrade && diff -y --suppress-common-lines /etc/skel/.zshrc ~/.zshrc && [ -f /var/run/reboot-required ] && sudo reboot -f'
 
 # confirm before overwriting something
 alias cp="cp -i"
@@ -20,14 +22,17 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 
 # Changing "ls" to "exa"
-alias ls='exa -al --color=always --group-directories-first' # my preferred listing
-alias la='exa -a --color=always --group-directories-first'  # all files and dirs
-alias ll='exa -l --color=always --group-directories-first'  # long format
-alias lt='exa -aT --color=always --group-directories-first' # tree listing
-alias l.='exa -a | egrep "^\."'
-
-# Set ls flags
-#alias ls='ls -lah --color=auto'
+if [ -x "$(command -v exa)" ]; then
+    alias ls='exa -al --color=always --group-directories-first' # my preferred listing
+    alias la='exa -a --color=always --group-directories-first'  # all files and dirs
+    alias ll='exa -l --color=always --group-directories-first'  # long format
+    alias lt='exa -aT --color=always --group-directories-first' # tree listing
+    alias l.='exa -a | egrep "^\."'
+else
+    # Set ls flags
+    echo "exa is not installed!"
+    alias ls='ls -lah --color=auto'
+fi
 
 # ProxyChains
 alias pc='proxychains'
